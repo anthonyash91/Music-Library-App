@@ -12,6 +12,7 @@ const dataController = {
     try {
       const user = await User.create(req.body);
       const token = createJWT(user);
+
       res.locals.data.user = user;
       res.locals.data.token = token;
       next();
@@ -30,12 +31,14 @@ const dataController = {
           path: 'likes',
           populate: { path: 'items' }
         });
-
       if (!user) throw new Error();
+
       const match = await bcrypt.compare(req.body.password, user.password);
       if (!match) throw new Error();
+
       res.locals.data.user = user;
       res.locals.data.token = createJWT(user);
+      next();
     } catch {
       res.status(400).json('Bad Credentials');
     }

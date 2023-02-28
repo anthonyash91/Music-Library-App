@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+
 const SALT_ROUNDS = 6;
 
 const userSchema = new Schema(
@@ -12,7 +13,12 @@ const userSchema = new Schema(
       lowercase: true,
       required: true
     },
-    password: { type: String, trim: true, minLength: 3, required: true },
+    password: {
+      type: String,
+      trim: true,
+      minLength: 3,
+      required: true
+    },
     icon: { type: String, required: false },
     albums: { items: [{ type: Schema.Types.ObjectId, ref: 'Album' }] },
     likes: { items: [{ type: Schema.Types.ObjectId, ref: 'Like' }] }
@@ -29,7 +35,7 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('pasword')) return next();
+  if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   return next();
 });
