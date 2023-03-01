@@ -325,12 +325,6 @@ export default function Album({
                     {convertLength(duration_ms, 200)}
                   </div>
 
-                  {albumData?.albums[0].tracks.items[0].artists.map(
-                    (artist, i) => {
-                      return <>hi</>;
-                    }
-                  )}
-
                   <div className="section icon like-track">
                     {user?.likes?.items?.some(
                       (like) => like.spotifyId === id
@@ -353,18 +347,10 @@ export default function Album({
                         <Button
                           buttonFunction={() => {
                             const createAlbumArtists = () => {
-                              return albumData.albums[0].tracks.items[
-                                i
-                              ].artists.map((artist, i) => {
+                              return artists.map((artist, i) => {
                                 return {
-                                  artistName:
-                                    albumData.albums[0].tracks.items[i].artists[
-                                      i
-                                    ].name,
-                                  artistId:
-                                    albumData.albums[0].tracks.items[i].artists[
-                                      i
-                                    ].id
+                                  artistName: artists[i].name,
+                                  artistId: artists[i].id
                                 };
                               });
                             };
@@ -374,7 +360,7 @@ export default function Album({
                                 albumName: albumData.albums[0].name,
                                 trackName: name,
                                 albumUri: albumData.albums[0].id,
-                                artists: createAlbumArtists(),
+                                artists: { items: createAlbumArtists() },
                                 coverArt: albumData.albums[0].images[0].url,
                                 preview: preview_url,
                                 playlist: '',
