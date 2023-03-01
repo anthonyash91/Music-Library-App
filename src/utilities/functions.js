@@ -1,39 +1,22 @@
 // spotify api provides album & track lengths in milliseconds so you have to convert them to hour:minute:second format
-export function convertAlbumLength(ms) {
+export function convertLength(ms, code) {
   let sec = Math.floor(ms / 1000);
   let hrs = Math.floor(sec / 3600);
-  sec -= hrs * 3600;
   let min = Math.floor(sec / 60);
-  sec -= min * 60;
 
+  sec -= hrs * 3600;
+  sec -= min * 60;
   sec = '' + sec;
   sec = ('00' + sec).substring(sec.length);
 
   if (hrs > 0) {
     min = '' + min;
     min = ('00' + min).substring(min.length);
-    return hrs + ' hr ' + min + ' min';
+    if (code === 100) return hrs + ' hr ' + min + ' min';
+    if (code === 200) return hrs + ':' + min + ':' + sec;
   } else {
-    return min + ' min ' + sec + ' sec';
-  }
-}
-
-export function convertTrackLength(ms) {
-  let sec = Math.floor(ms / 1000);
-  let hrs = Math.floor(sec / 3600);
-  sec -= hrs * 3600;
-  let min = Math.floor(sec / 60);
-  sec -= min * 60;
-
-  sec = '' + sec;
-  sec = ('00' + sec).substring(sec.length);
-
-  if (hrs > 0) {
-    min = '' + min;
-    min = ('00' + min).substring(min.length);
-    return hrs + ':' + min + ':' + sec;
-  } else {
-    return min + ':' + sec;
+    if (code == 100) return min + ' min ' + sec + ' sec';
+    if (code === 200) return min + ':' + sec;
   }
 }
 

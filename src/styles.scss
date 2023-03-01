@@ -1,0 +1,228 @@
+$primary-accent: #f64646;
+$container-width: 1100px;
+$albumart-size: 213px;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  background-color: #f4f5f9;
+  color: #4d4d4d;
+  display: flex;
+  font: 400 16px/22px "Open Sans", Helvetica, Arial, Sans-Serif;
+  justify-content: center;
+  margin: 50px;
+}
+
+#container {
+  background-color: #fff;
+  border-radius: 48px;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding: 50px;
+  width: $container-width;
+}
+
+#album-header {
+  gap: 40px;
+
+  #album-art {
+    background-size: cover;
+    border-radius: 38px;
+    height: $albumart-size;
+    min-width: $albumart-size;
+  }
+
+  #album-info {
+    /*   align-items: center; */
+    flex-direction: column;
+    height: $albumart-size;
+    justify-content: center;
+    margin-top: -4px;
+
+    h1 {
+      line-height: 40px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: calc(#{$container-width} - 350px);
+    }
+
+    #album-metadata {
+      flex-direction: column;
+      gap: 3px;
+      margin: 12px 0 20px 1px;
+
+      .flex {
+        gap: 10px;
+
+        .type {
+          text-transform: capitalize;
+        }
+
+        span:not(.artist-comma) {
+          color: #d1d1d1;
+        }
+
+        .artist-name:last-child span {
+          display: none;
+        }
+      }
+    }
+  }
+
+  #album-info-buttons {
+    gap: 14px;
+
+    button {
+      align-items: center;
+      background-color: $primary-accent;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      display: inline-flex;
+      font: 700 16px 'Open Sans', Helvetica, Arial, Sans-Serif;
+      gap: 8px;
+      justify-content: center;
+      padding: 14px 18px 14px 18px;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
+
+      svg {
+        fill: #fff;
+        height: 18px;
+
+        .heart {
+          fill: $primary-accent;
+        }
+      }
+    }
+
+    button.favorite-album-button {
+      background-color: rgba($primary-accent, 0.1);
+      color: $primary-accent;
+    }
+  }
+}
+
+ul#tracklist {
+  font-size: 15px;
+  line-height: 23px;
+  // line-height: 17px;
+  list-style: none;
+
+  // li:nth-child(2n) {background: yellow;}
+
+  li {
+    align-items: center;
+    border-radius: 16px;
+    justify-content: space-around;
+    padding: 12px 24px 12px 24px;
+
+    .section {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .track-info {
+      gap: 16px;
+      justify-content: start;
+      min-width: 400px;
+
+      .audio-player {
+        align-items: center;
+        background-color: #F4F5F9;
+        border-radius: 12px;
+        color: rgba(0,0,0,.5);
+        display: flex;
+        font-weight: 700;
+        height: 49px;
+        justify-content: center;
+        // margin-top: -1px;
+        max-width: 49px;
+        min-width: 49px;
+        // display: none;
+      }
+
+      .track-title-artists {
+        line-height: 19px;
+
+        .title {
+          // font-size: 15px;
+          font-weight: 600;
+        }
+
+        .artists {
+          font-size: 13px;
+
+          span:last-child span {
+            display: none;
+          }
+
+          a {
+            color: #B3B3B3;
+            font-weight: 400;
+          }
+
+          a:hover {
+            color: $primary-accent;
+          }
+        }
+      }
+    }
+
+    .icon {
+      max-width: 100px;
+    }
+
+    .like-track {
+      form {
+        height: 23px;
+      }
+
+      button {
+        background-color: transparent;
+        border: 2px solid transparent;
+        height: 23px;
+  
+        path.not-favorited {
+          fill: rgba($primary-accent, 0.4);
+        }
+      }
+    }
+
+    svg {
+      fill: $primary-accent;
+      width: 19px;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+a {
+  color: $primary-accent;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #333;
+}
